@@ -8,7 +8,7 @@ class DashboardPage extends React.Component {
     super(props);
 
     this.state = {
-      secretData: ''
+      secretData: {}
     };
   }
 
@@ -21,7 +21,8 @@ class DashboardPage extends React.Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         this.setState({
-          secretData: xhr.response.message  // change what is passed here to include the html template...
+          secretData: xhr.response  // change what is passed here to include the html template...
+          // secretData: xhr.response.message
         });
       }
     });
