@@ -16,7 +16,7 @@ const ReferForm = ({ onSubmit, onChange, errors, successMessage, user }) => (
         <TextField
           floatingLabelText="Referral Email"
           name="referralEmail"
-          errorText={errors.name}          
+          errorText={errors.email}
           onChange={onChange}
           value={user.referralEmail}
         />

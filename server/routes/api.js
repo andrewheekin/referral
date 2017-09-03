@@ -1,32 +1,44 @@
 const express = require('express');
+const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
 const config = require('../../config');
 const emailAPI = require('../middleware/email');
 
 
+
 const router = new express.Router();
 
 // enter an email to refer
 router.post('/refer', (req, res, next) => {
-  if (!req.body.referralEmail) {
+  if (!req.body.referralEmail || !validator.isEmail(req.body.referralEmail)) {
     return res.status(400).json({
       success: false,
       message: 'Please enter a valid email.'
     });
   }
 
-  emailAPI.send({
-    from: 'Andrew\'s Referral System <me@samples.mailgun.org>',
-    to: req.body.referralEmail,
-    subject: `Your friend ${req.user.name} has referred you`,
-    text: `Hi! You've been referred by your friend ${req.user.name}. Sign up at the link below, and you'll each receive $5.`
-  });
-
-  return res.json({
-    success: true,
-    message: 'Thanks for the referral!'
-  });  
+  User.find({ 'email': req.body.referralEmail })
+    .then(user => {
+      if (user) {
+        return res.status(400).json({
+          success: false,
+          message: 'A user with this email exists.'
+        });        
+      }
+      else {
+        emailAPI.send({
+          from: 'Andrew\'s Referral System <me@samples.mailgun.org>',
+          to: req.body.referralEmail,
+          subject: `Your friend ${req.user.name} has referred you`,
+          text: `Hi! You've been referred by your friend ${req.user.name}. Sign up at the link below, and you'll each receive $5.`
+        });
+        return res.json({
+          success: true,
+          message: 'Thanks for the referral!'
+        }); 
+      }
+    }); 
 });
 
 router.get('/dashboard', (req, res) => {
