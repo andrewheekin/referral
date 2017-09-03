@@ -3,15 +3,20 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 
-const ReferForm = ({ onSubmit, onChange, user }) => (
+const ReferForm = ({ onSubmit, onChange, errors, successMessage, user }) => (
   <div className="container">
     <form action="/" onSubmit={onSubmit}>
       <h2 className="card-heading">Refer a user:</h2>
+
+      {errors.summary && <p className="error-message">{errors.summary}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+
 
       <div className="field-line">
         <TextField
           floatingLabelText="Referral Email"
           name="referralEmail"
+          errorText={errors.name}          
           onChange={onChange}
           value={user.referralEmail}
         />

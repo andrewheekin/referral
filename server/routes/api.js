@@ -9,6 +9,13 @@ const router = new express.Router();
 
 // enter an email to refer
 router.post('/refer', (req, res, next) => {
+  if (!req.body.referralEmail) {
+    return res.status(400).json({
+      success: false,
+      message: 'Please enter a valid email.'
+    });
+  }
+
   emailAPI.send({
     from: 'Andrew\'s Referral System <me@samples.mailgun.org>',
     to: req.body.referralEmail,
@@ -17,7 +24,8 @@ router.post('/refer', (req, res, next) => {
   });
 
   return res.json({
-    success: true
+    success: true,
+    message: 'Thanks for the referral!'
   });  
 });
 
