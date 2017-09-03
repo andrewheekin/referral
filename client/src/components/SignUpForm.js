@@ -50,7 +50,7 @@ const SignUpForm = ({ onSubmit, onChange, errors, user }) => (
           errorText={errors.password}
           value={user.referrer}
         />
-      </div>          
+      </div>
 
       <div className="button-line">
         <RaisedButton type="submit" label="Create New Account" primary />

@@ -15,7 +15,7 @@ const routes = {
         if (Auth.isUserAuthenticated()) {
           callback(null, DashboardPage);
         } else {
-          callback(null, HomePage);
+          callback(null, SignUpPage);
         }
       }
     },
