@@ -47,6 +47,16 @@ const SignUpForm = ({
         />
       </div>
 
+      <div className="field-line">
+        <TextField
+          floatingLabelText="Referral Email"
+          name="referrer"
+          onChange={onChange}
+          errorText={errors.password}
+          value={user.referrer}
+        />
+      </div>          
+
       <div className="button-line">
         <RaisedButton type="submit" label="Create New Account" primary />
       </div>

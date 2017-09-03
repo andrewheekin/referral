@@ -3,9 +3,9 @@ const domain = 'sandbox77e2bf7f228a478691a298193e694865.mailgun.org';
 const mailgun = require('mailgun-js')({apiKey: apiKey, domain: domain});
 
 let email = {
-  send: function(data) {
-    mailgun.messages().send(data, function (error, body) { 
-      console.log('sent email', 'body: ', body, 'error: ', error, 'data: ', data);
+  send: (data) => {
+    mailgun.messages().send(data, (error, body) => { 
+      console.log('sent email', 'body: ', body, 'data: ', data);
     });
   }
 }

@@ -11,7 +11,8 @@ class SignUpPage extends React.Component {
       user: {
         email: '',
         name: '',
-        password: ''
+        password: '',
+        referrer: ''
       }
     };
 
@@ -23,9 +24,10 @@ class SignUpPage extends React.Component {
     event.preventDefault();
 
     const name = encodeURIComponent(this.state.user.name);
+    const referrer = encodeURIComponent(this.state.user.referrer);    
     const email = encodeURIComponent(this.state.user.email);
     const password = encodeURIComponent(this.state.user.password);
-    const formData = `name=${name}&email=${email}&password=${password}`;
+    const formData = `name=${name}&referrer=${referrer}&email=${email}&password=${password}`;
 
     const xhr = new XMLHttpRequest();
     xhr.open('post', '/auth/signup');
