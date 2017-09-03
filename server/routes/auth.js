@@ -1,7 +1,7 @@
 const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
-const mailgun = require('mailgun-js')({apiKey: 'key-b050f0517479edd9aee415bf3aa5bad1', domain: 'sandbox77e2bf7f228a478691a298193e694865.mailgun.org'});
+const emailAPI = require('../middleware/email');
 
 const router = new express.Router();
 
@@ -111,17 +111,6 @@ router.post('/login', (req, res, next) => {
     });
   }
 
-  var data = {
-    from: 'Excited User <me@samples.mailgun.org>',
-    to: 'andrewheekin@gmail.com',
-    subject: 'Hello',
-    text: 'Testing some Mailgun awesomness!'
-  };
-   
-  mailgun.messages().send(data, function (error, body) {
-    console.log('sup login',data, body, error);
-  });  
-
 
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
@@ -138,6 +127,12 @@ router.post('/login', (req, res, next) => {
       });
     }
 
+    emailAPI.send({
+      from: 'Excited User <me@samples.mailgun.org>',
+      to: 'andrewheekin@gmail.com',
+      subject: 'Hello0oo',
+      text: 'Testing some Mailgun awesomness!'
+    });
 
     return res.json({
       success: true,
