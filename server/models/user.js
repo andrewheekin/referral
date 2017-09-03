@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// define the User model schema
 const UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -20,7 +19,6 @@ UserSchema.methods.comparePassword = function comparePassword(password, callback
 UserSchema.pre('save', function saveHook(next) {
   const user = this;
 
-  // proceed further only if the password is modified or the user is new
   if (!user.isModified('password')) return next();
 
 
@@ -30,7 +28,6 @@ UserSchema.pre('save', function saveHook(next) {
     return bcrypt.hash(user.password, salt, (hashError, hash) => {
       if (hashError) { return next(hashError); }
 
-      // replace a password string with hash value
       user.password = hash;
 
       return next();
