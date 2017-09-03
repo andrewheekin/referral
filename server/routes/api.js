@@ -12,9 +12,13 @@ router.post('/refer', (req, res, next) => {
   emailAPI.send({
     from: 'Andrew\'s Referral System <me@samples.mailgun.org>',
     to: req.body.referralEmail,
-    subject: `Your friend ${req.body.name} has referred you`,
-    text: `Hi! You've been referred by your friend ${req.body.name}. Sign up at the link below, and you'll each receive $5.`
+    subject: `Your friend ${req.user.name} has referred you`,
+    text: `Hi! You've been referred by your friend ${req.user.name}. Sign up at the link below, and you'll each receive $5.`
   });
+
+  return res.json({
+    success: true
+  });  
 });
 
 router.get('/dashboard', (req, res) => {

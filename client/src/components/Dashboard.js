@@ -14,19 +14,3 @@ const Dashboard = ({ data }) => (
 );
 
 export default Dashboard;
-
-    // <form action="/" onSubmit={onSubmit}>
-    //   <div className="field-line">
-    //     <TextField
-    //       floatingLabelText="Refer an email"
-    //       name="referralEmail"
-    //       onChange={onChange}
-    //       errorText={errors.password}
-    //       value={user.refferalEmail}
-    //     />
-    //   </div>
-
-    //   <div className="button-line">
-    //     <RaisedButton type="submit" label="Create New Account" primary />
-    //   </div>
-    // </form>
