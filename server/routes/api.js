@@ -20,7 +20,8 @@ router.post('/refer', (req, res, next) => {
 
   User.find({ 'email': req.body.referralEmail })
     .then(user => {
-      if (user) {
+      if (user.length > 0) {
+        console.log('user from refer query: ', user, !!user);
         return res.status(400).json({
           success: false,
           message: 'A user with this email exists.'
@@ -33,9 +34,9 @@ router.post('/refer', (req, res, next) => {
           subject: `Your friend ${req.user.name} has referred you`,
           text: `Hi! You've been referred by your friend ${req.user.name}. Sign up at the link below, and you'll each receive $5.`
         });
-        return res.json({
+        return res.status(200).json({
           success: true,
-          message: 'Thanks for the referral!'
+          successMessage: 'Thanks for the referral!'
         }); 
       }
     }); 

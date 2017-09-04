@@ -10,7 +10,8 @@ class DashboardPage extends React.Component {
 
     this.state = {
       data: {},
-      errors: {},      
+      errors: {},
+      successMessage: '',
       user: {
         referralEmail: ''
       }      
@@ -28,7 +29,7 @@ class DashboardPage extends React.Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         this.setState({
-          data: xhr.response  // change what is passed here to include the html template...
+          data: xhr.response // change what is passed here to include the html template...
         });
       }
     });
@@ -48,6 +49,9 @@ class DashboardPage extends React.Component {
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
+        this.setState({
+          successMessage: xhr.response.successMessage
+        });
 
         this.setState({
           errors: {}
@@ -84,7 +88,8 @@ class DashboardPage extends React.Component {
         <ReferForm
           onSubmit={this.processForm}
           onChange={this.changeUser} 
-          errors={this.state.errors}                   
+          errors={this.state.errors}
+          successMessage={this.state.successMessage}                         
           user={this.state.user}
         />
       </div>
