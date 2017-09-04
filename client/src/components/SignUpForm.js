@@ -47,7 +47,7 @@ const SignUpForm = ({ onSubmit, onChange, errors, user }) => (
           floatingLabelText="Referral Email"
           name="referrer"
           onChange={onChange}
-          errorText={errors.password}
+          errorText={errors.referrer}
           value={user.referrer}
         />
       </div>
