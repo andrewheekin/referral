@@ -29,11 +29,10 @@ function validateSignupForm(payload) {
 // User.findone(referred by) if that isn't in there throw an error
 // would also need to import the user model at the top
 
-  // referral email isnt required
-  // if (!payload || typeof payload.referrer !== 'string' || !validator.isEmail(payload.referrer)) {
-  //   isFormValid = false;
-  //   errors.referrer = 'Please provide a correct referral email address.';
-  // }
+  if (!validator.isEmail(payload.referrer)) {
+    isFormValid = false;
+    errors.referrer = 'Please provide a correct referral email address.';
+  }
 
   if (!isFormValid) {
     message = 'Check the form for errors.';
