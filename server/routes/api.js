@@ -32,7 +32,7 @@ router.post('/refer', (req, res, next) => {
           from: 'Andrew\'s Referral System <me@samples.mailgun.org>',
           to: req.body.referralEmail,
           subject: `Your friend ${req.user.name} has referred you`,
-          text: `Hi! You've been referred by your friend ${req.user.name}. Sign up at the link below, and you'll each receive $5.`
+          text: `Hi! You've been referred by your friend ${req.user.name}. Sign up at this link - http://45.55.172.169/ - and you'll each receive $5.`
         });
         return res.status(200).json({
           success: true,
