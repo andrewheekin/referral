@@ -25,5 +25,9 @@ const apiRoutes = require('./server/routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
+// Handle 404 - keep as a last route
+app.use(function(req, res, next) {
+    res.redirect('/');
+});
 
 app.listen(3000, () => { console.log('running at http://localhost:3000') });
